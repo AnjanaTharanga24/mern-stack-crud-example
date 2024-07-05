@@ -1,6 +1,4 @@
-import logo from './logo.svg';
 import './App.css';
-import Button from 'react-bootstrap/Button';
 import { Route,Routes } from 'react-router-dom';
 import Dashboard from './components/dashboard/Dashboard';
 import PostUser from './components/postUser/PostUser';

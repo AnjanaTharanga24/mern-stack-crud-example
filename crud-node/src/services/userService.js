@@ -5,6 +5,12 @@ class UserService{
       const newUser = new User({name,email,phone});
       return await newUser.save();
     }
+
+    async getALlUsers(){
+      return await User.find();
+    }
+    
+
 };
 
 module.exports = new UserService();

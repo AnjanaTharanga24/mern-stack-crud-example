@@ -13,6 +13,15 @@ class UserController{
         }
     }
 
+    async getAllUsers(req, res){
+        try {
+          const AllUsers = await userService.getALlUsers();
+          res.json(AllUsers);
+        } catch (error) {
+            res.status(500).json({error:error.message});
+        }
+    }
+
 };
 
 module.exports = new UserController();
