@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import '../postUser/postUser.css'
 import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 export default function PostUser() {
   const [formData, setFormData] = useState({
@@ -9,6 +10,8 @@ export default function PostUser() {
     email: "",
     phone: ""
   });
+
+  const navigate = useNavigate();
 
   const handleInputChange= (event) =>{
     const {name,value}= event.target;
@@ -19,9 +22,23 @@ export default function PostUser() {
   }
   const handleSubmit = async (e) =>{
     e.preventDefault();
-    console.log("name", formData.name);
-    console.log("email", formData.email);
-    console.log("phone", formData.phone)
+
+    try{
+      const response = await fetch("http://localhost:5000/api/user", {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(formData)    
+      })
+      const data = await response.json(response);
+      console.log(data);
+      navigate("/")
+    }catch(error){
+      console.error(error.message);
+    }
+  
+    
   }
   return (
     <div>
