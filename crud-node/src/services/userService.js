@@ -6,7 +6,7 @@ class UserService{
       return await newUser.save();
     }
 
-    async getALlUsers(){
+    async getAllUsers(){
       return await User.find();
     }
     
