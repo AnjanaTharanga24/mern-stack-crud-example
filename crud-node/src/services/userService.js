@@ -10,6 +10,9 @@ class UserService{
       return await User.find();
     }
     
+    async getUserById(userId){
+      return await User.findById(userId);
+    }
 
 };
 
