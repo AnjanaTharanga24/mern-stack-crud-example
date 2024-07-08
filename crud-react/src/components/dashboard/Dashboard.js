@@ -11,6 +11,7 @@ export default function Dashboard() {
         const response =await fetch("http://localhost:5000/api/user");
         const data = await response.json();
         setUsers(data);
+        console.log(data);
       } catch (error) {
         console.error("error while fetching users:",error.message);
       }
@@ -30,14 +31,14 @@ export default function Dashboard() {
         </tr>
       </thead>
       <tbody>
-        {users.map((users)=>{
-           <tr key={users._id}>
-           <td>{users.name}</td>
-           <td>{users.email}</td>
-           <td>{users.phone}</td>
+        {users.map((user)=>(
+           <tr key={user._id}>
+           <td>{user.name}</td>
+           <td>{user.email}</td>
+           <td>{user.phone}</td>
            <td></td>
          </tr>
-        })}
+        ))}
        
       </tbody>
     </Table>
