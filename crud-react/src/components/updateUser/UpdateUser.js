@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Button , Form} from 'react-bootstrap';
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import "../updateUser/updateUser.css"
 export default function UpdateUser() {
   const {id} = useParams();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name:"",
     email:"",
@@ -32,6 +33,26 @@ export default function UpdateUser() {
     fetchUser();
   },[id]);
 
+  const handleSubmit = async (e) =>{
+    e.preventDefault();
+
+    try{
+      const response = await fetch(`http://localhost:5000/api/user/${id}`, {
+        method:"PATCH",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(formData)    
+      })
+      const data = await response.json(response);
+      console.log(data);
+      navigate("/")
+    }catch(error){
+      console.error(error.message);
+    }
+  
+    
+  }
   return (
     <div>
        <div className="card p-3 form-card">
@@ -70,7 +91,7 @@ export default function UpdateUser() {
              />
           </Form.Group>
 
-          <Button variant="primary" >update user</Button>
+          <Button variant="primary" onClick={handleSubmit}>update user</Button>
 
 
         </Form>
