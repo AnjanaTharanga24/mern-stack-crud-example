@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
 import '../dashboard/dashboard.css';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
   const [users,setUsers]= useState([]);
+  const navigate = useNavigate();
 
   useEffect(()=>{
     const fetchUsers = async()=>{
@@ -19,6 +21,10 @@ export default function Dashboard() {
     }
     fetchUsers();
   },[]);
+
+  const handleUpdate = (userId) => {
+      navigate(`/user/${userId}`)
+  }
   return (
     <div>
 
@@ -38,8 +44,8 @@ export default function Dashboard() {
            <td>{user.email}</td>
            <td>{user.phone}</td>
            <td>
-           <Button variant="primary">Primary</Button>{' '}
-           <Button variant="danger">Warning</Button>{' '}
+           <Button variant="primary" onClick={() => handleUpdate(user._id)}>Update</Button>{' '}
+           {/* <Button variant="danger" onClick={()=> handleDelete(user._id)}>Delete</Button>{' '} */}
 
            </td>
          </tr>
