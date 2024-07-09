@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
 import '../dashboard/dashboard.css';
+import Button from 'react-bootstrap/Button';
 
 export default function Dashboard() {
   const [users,setUsers]= useState([]);
@@ -36,7 +37,11 @@ export default function Dashboard() {
            <td>{user.name}</td>
            <td>{user.email}</td>
            <td>{user.phone}</td>
-           <td></td>
+           <td>
+           <Button variant="primary">Primary</Button>{' '}
+           <Button variant="danger">Warning</Button>{' '}
+
+           </td>
          </tr>
         ))}
        
