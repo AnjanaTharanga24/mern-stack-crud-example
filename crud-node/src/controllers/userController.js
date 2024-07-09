@@ -35,6 +35,20 @@ class UserController{
         }
     }
 
+    async updateUser(req,res){
+        const userId = req.params.id;
+        const updatedData = req.body;
+        try {
+            const updatedUser = await userService.updateUser(userId, updatedData);
+            if(!updatedUser)
+                return res.status(404).json({error:"User not found"});
+            
+            res.json(updatedUser);
+        } catch (error) {
+            res.status(500).json({error:error.message});
+        }
+    }
+
 };
 
 module.exports = new UserController();
