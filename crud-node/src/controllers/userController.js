@@ -49,6 +49,18 @@ class UserController{
         }
     }
 
+    async deleteUser(req, res) {
+        const userId = req.params.id;
+        try {
+            const deletedUser = await userService.deleteUser(userId);
+            if (!deletedUser)
+                return res.status(404).json({error: "User not found"});
+            res.json({message: "User deleted successfully", user: deletedUser});
+        } catch(error) {
+            res.status(500).json({error: error.message});
+        }
+    }
+
 };
 
 module.exports = new UserController();
